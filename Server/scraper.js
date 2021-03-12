@@ -1,5 +1,5 @@
-const puppeteer = require('puppeteer');
-const $ = require('cheerio');
+import puppeteer from 'puppeteer'
+import $ from 'cheerio'
 
 const url = 'https://en.wikipedia.org/wiki/List_of_American_television_programs'
 
