@@ -1,20 +1,16 @@
 import mongo from "./mongo.js"
 import tvShow from './models/tvShow.js'
+import scraper from './scraper.js'
 
 const connectToMongoDB = async () => {
     await mongo().then(async (mongoose) => {
         try{
             console.log('Connected to MongoDB')
+            const newShows = await scraper();
 
-            const newShow = {
-                title: 'Suits',
-                description: '',
-                years: '2011-2019',
-                catergory: 'Legal Drama',
-                network: 'USA Network'
+            for(let i = 0; i < newShows.length; ++i){
+                await new tvShow(newShows[i]).save();
             }
-
-            await new tvShow(newShow).save();
         } 
         finally{
             mongoose.connection.close();

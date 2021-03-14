@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer'
 import $ from 'cheerio'
 
+const newShows = [];
 
 const url = 'https://en.wikipedia.org/wiki/List_of_American_television_programs'
 
@@ -21,21 +22,13 @@ async function getTitle(page){
             let showText = show.text().trim()
             let texts = showText.split('\n')
 
-            const newShow = {
+            newShows.push({
                 title: texts[0],
                 description: '', 
                 years: texts[2],
                 category: texts[3],
                 network: texts[4],
-            };
-            tvShow(newShow).save();
-            newShow.save();
-
-            console.log("title: " +  texts[0]);
-            console.log("year: " + texts[2]);
-            console.log("catergory: " + texts[3]);
-            console.log("Network: " + texts[4]);
-            console.log("\n")
+            });
         }
     })
 }
@@ -45,4 +38,7 @@ async function monitor(){
     await getTitle(page);
 }
 
-monitor()
+export default async () => {
+    await monitor()
+    return newShows;
+};
