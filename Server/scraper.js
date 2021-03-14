@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer'
 import $ from 'cheerio'
 
+
 const url = 'https://en.wikipedia.org/wiki/List_of_American_television_programs'
 
 async function configureBrowser(){
@@ -19,6 +20,17 @@ async function getTitle(page){
         if(show.length ===  6){
             let showText = show.text().trim()
             let texts = showText.split('\n')
+
+            const newShow = {
+                title: texts[0],
+                description: '', 
+                years: texts[2],
+                category: texts[3],
+                network: texts[4],
+            };
+            tvShow(newShow).save();
+            newShow.save();
+
             console.log("title: " +  texts[0]);
             console.log("year: " + texts[2]);
             console.log("catergory: " + texts[3]);
