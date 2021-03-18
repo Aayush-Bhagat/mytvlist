@@ -6,6 +6,7 @@ const tvShowSchema = mongoose.Schema({
     years: String,
     category: String,
     network: String,
+    image: String,
 });
 
 export default mongoose.model('shows', tvShowSchema);
