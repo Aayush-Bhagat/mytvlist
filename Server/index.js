@@ -1,29 +1,26 @@
-import mongo from "./mongo.js"
-import tvShow from './models/tvShow.js'
-import scraper from './scraper.js'
-import { findOne } from "domutils"
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import mongoose from 'mongoose';
 
-const connectToMongoDB = async () => {
-    await mongo().then(async (mongoose) => {
-        try{
-            console.log('Connected to MongoDB')
-            const newShows = await scraper();
+import showRoutes from './routes/shows.js';
 
-            for(let i = 0; i < newShows.length; ++i){
-                const show = new tvShow(newShows[i]);
-                if(findOne(show)){
-                    continue;
-                }
-                else{
-                    await show.save();
-                } 
-            }
-        } 
-        finally{
-            console.log('Successfully added all the shows')
-            mongoose.connection.close();
-        }
-    })
-}
+const app = express();
 
-connectToMongoDB();
+app.use('/shows', showRoutes);
+
+app.use(bodyParser.json({limit: "30mb", extended: true}))
+app.use(bodyParser.urlencoded({limit: "30mb", extended: true}))
+
+app.use(cors)
+
+const CONNECTION_URL = 'mongodb+srv://canary:lolme123@mytvlist.jyzcv.mongodb.net/TVShows?retryWrites=true&w=majority'
+
+const PORT = process.env.PORT || 5000;
+
+
+await mongoose.connect(CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+.then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+.catch((error) => console.log(error));
+
+await mongoose.set('useFindAndModify', false);

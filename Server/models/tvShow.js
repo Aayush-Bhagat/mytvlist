@@ -9,4 +9,5 @@ const tvShowSchema = mongoose.Schema({
     image: String,
 });
 
-export default mongoose.model('shows', tvShowSchema);
+const tvShowModel = mongoose.model('shows', tvShowSchema);
+export default tvShowModel;
