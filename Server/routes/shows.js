@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { getAllShows, getShow } from '../controllers/paths.js'
+import { getAllShows, getShow } from '../controllers/showPaths.js'
 
 const router = express.Router();
 

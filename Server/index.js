@@ -3,13 +3,17 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 
 import showRoutes from './routes/shows.js';
+import userRoutes from './routes/users.js';
+import authRoutes from './routes/auth.js';
 
 const app = express();
 
-app.use('/shows', showRoutes);
-
 app.use(express.json({limit: "30mb", extended: true}))
 app.use(express.urlencoded({limit: "30mb", extended: true}))
+
+app.use('/api/shows', showRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/register', authRoutes);
 
 app.use(cors)
 
