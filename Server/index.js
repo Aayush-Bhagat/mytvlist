@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 import showRoutes from './routes/shows.js';
 import userRoutes from './routes/users.js';
@@ -13,11 +14,12 @@ app.use(express.urlencoded({limit: "30mb", extended: true}))
 
 app.use('/api/shows', showRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api/register', authRoutes);
+app.use('/api/auth', authRoutes);
 
 app.use(cors)
+dotenv.config()
 
-const CONNECTION_URL = 'mongodb+srv://canary:lolme123@mytvlist.jyzcv.mongodb.net/TVShows?retryWrites=true&w=majority'
+const CONNECTION_URL = process.env.Mongo_URL
 
 const PORT = process.env.PORT || 5000;
 
