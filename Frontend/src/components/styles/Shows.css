@@ -6,7 +6,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
   gap: 2rem;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .card {
   overflow: hidden;
@@ -47,4 +47,8 @@ body {
 .card:hover .card__btn {
   background: #d50000;
   color: white;
+}
+
+.searhbar {
+  margin-bottom: 1.5%;
 }

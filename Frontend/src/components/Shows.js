@@ -18,7 +18,7 @@ export default function Shows(props) {
 
     return (
         <div>
-            <input type="text" onChange={handleSearchChange} name="search show"/>
+            <input  className="searhbar" type="text" onChange={handleSearchChange} name="search show"/>
             <div className="wrapper">
             {showsToDisplay.map((tvShow) => {
                return (
