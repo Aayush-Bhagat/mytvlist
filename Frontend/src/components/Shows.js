@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import ShowCards from './ShowCards'
 import './styles/Shows.css'
 
 export default function Shows(props) {
@@ -22,13 +23,7 @@ export default function Shows(props) {
             <div className="wrapper">
             {showsToDisplay.map((tvShow) => {
                return (
-                <div className="card">
-                <div className="card__body">
-                  <h2 className="card__title">{tvShow.title}</h2>
-                  <p className="card__description">{tvShow.category}</p>
-                </div>
-                <button className="card__btn">ADD</button>
-              </div>
+                <ShowCards show = {tvShow}/>
                ) 
             })}
             {
