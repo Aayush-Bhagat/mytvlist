@@ -15,9 +15,7 @@ app.use('/api/shows', showRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 
-app.use(cors({
-    origin: '*'
-}));
+app.use(cors())
 
 dotenv.config()
 
