@@ -8,7 +8,6 @@ import userRoutes from './routes/users.js';
 import authRoutes from './routes/auth.js';
 
 const app = express();
-
 app.use(express.json({limit: "30mb", extended: true}))
 app.use(express.urlencoded({limit: "30mb", extended: true}))
 
@@ -16,7 +15,10 @@ app.use('/api/shows', showRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 
-app.use(cors)
+app.use(cors({
+    origin: '*'
+}));
+
 dotenv.config()
 
 const CONNECTION_URL = process.env.Mongo_URL
