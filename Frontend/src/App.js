@@ -6,7 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import Home from './components/Home'
-import Shows from './components/getShows'
+import GetShows from './components/getShows'
 
 export default function App() {
   return (
@@ -25,7 +25,7 @@ export default function App() {
 
         <Switch>
           <Route path="/shows">
-            <Shows />
+            <GetShows />
           </Route>
           <Route path="/">
             <Home />

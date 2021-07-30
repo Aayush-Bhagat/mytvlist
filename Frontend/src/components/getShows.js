@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-
+import Shows from './Shows'
 const baseURL = "http://localhost:5000/api/shows";
 
-export default function Shows() {
+export default function GetShows() {
     const [shows, setShows] = useState(null)
     const [loading, setLoading] = useState(true)
 
@@ -11,6 +11,8 @@ export default function Shows() {
         axios.get(baseURL)
         .then((res) => {
             setShows(res.data)
+        })
+        .finally(() => {
             setLoading(false)
         })
     }, [])
@@ -22,13 +24,7 @@ export default function Shows() {
             Loading...
         </div>
         : 
-        <div>
-            {shows.map((show) =>{
-                return (
-                    <p key= {show._id} > {show.title} </p>
-                )
-            })}
-        </div>
+        <Shows shows={shows} />
         }
         </div>
     )
