@@ -27,18 +27,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
-    watched: {
-        type: Array, 
-        default: []
-    },
-    watching: {
-        type: Array, 
-        default: []
-    },
-    watchlist: {
-        type: Array, 
-        default: []
-    }
+    Shows: [{
+        showId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'shows'
+        },
+        Watched: {
+            type: String, 
+            enum: ["Watched", "Watching", "Plan to Watch", "On Hold", "Dropped"]
+        },
+        userScore: {
+            type: Number, 
+            min: 0,
+            max: 10, 
+            default: null
+        }
+    }],
 }, {timestamps: true}
 );
 
