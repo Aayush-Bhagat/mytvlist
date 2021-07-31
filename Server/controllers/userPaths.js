@@ -1,4 +1,5 @@
 import userModel from '../models/user.js';
+import tvShowModel from '../models/tvShow.js'
 
 export const getUser = async (req, res) => {
     try {
@@ -27,4 +28,17 @@ export const getCurUser = async (req, res) => {
         res.status(404).json({message: error.message})
     }
 
+}
+
+export const addShow = async (req, res) => {
+    try {
+        const user = await userModel.findOne({username: req.user.username})
+        user.Shows.push({
+            showId: req.params.id,
+        })
+        user.save()
+        res.status(200).json(user)
+    } catch (error){
+        res.status(404).json({message: error.message})
+    }
 }

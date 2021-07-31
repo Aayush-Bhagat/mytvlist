@@ -34,7 +34,8 @@ const userSchema = new mongoose.Schema({
         },
         Watched: {
             type: String, 
-            enum: ["Watched", "Watching", "Plan to Watch", "On Hold", "Dropped"]
+            enum: ["Watched", "Watching", "Plan to Watch", "On Hold", "Dropped"],
+            default: "Watching"
         },
         userScore: {
             type: Number, 
