@@ -51,7 +51,8 @@ async function getImage(page){
         console.log(page.url())  
         let html = await page.evaluate(() => document.body.innerHTML)
         const $ = cheerio.load(html)
-        let img = $('img', html)
+        let imgDiv = $(".mJxzWe", html)
+        let img = $('img', imgDiv)
         let imgLink = img.attr('src')
         newShows[i].image = imgLink;
         console.log(newShows[i].image);
