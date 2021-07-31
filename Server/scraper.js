@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer'
-import $ from 'cheerio'
+import cheerio from 'cheerio'
 
 const newShows = [];
 
@@ -16,6 +16,7 @@ async function configureBrowser(URL){
 async function getTitle(page){
     await page.reload();
     let html = await page.evaluate(() => document.body.innerHTML);
+    const $ = cheerio.load(html)
 
     $('tr', html).each( function() {
         let show = $('td', $(this))
@@ -49,6 +50,7 @@ async function getImage(page){
         ]).catch(e => console.log(e)); 
         console.log(page.url())  
         let html = await page.evaluate(() => document.body.innerHTML)
+        const $ = cheerio.load(html)
         let img = $('img', html)
         let imgLink = img.attr('src')
         newShows[i].image = imgLink;
