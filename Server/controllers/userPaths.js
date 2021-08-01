@@ -33,8 +33,14 @@ export const getCurUser = async (req, res) => {
 export const addShow = async (req, res) => {
     try {
         const user = await userModel.findOne({username: req.user.username})
+        const watchStatus = req.body.watch
+        let findShow = user.Shows.reduce((acc,e)=> e.showId == req.params.id? true : acc , false)
+        if(findShow){
+            return res.status(409).json({message: "Show already added"})
+        }
         user.Shows.push({
             showId: req.params.id,
+            Watched: watchStatus,
         })
         user.save()
         res.status(200).json(user)
