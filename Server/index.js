@@ -23,9 +23,15 @@ const CONNECTION_URL = process.env.Mongo_URL
 
 const PORT = process.env.PORT || 5000;
 
+const mongoConnect = async() => { 
+    await mongoose.connect(CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
+    .catch((error) => console.log(error));
+    await mongoose.set('useFindAndModify', false);
 
-await mongoose.connect(CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true})
-.then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
-.catch((error) => console.log(error));
+    return mongoose
+}
 
-await mongoose.set('useFindAndModify', false);
+//mongoConnect()
+
+export default mongoConnect

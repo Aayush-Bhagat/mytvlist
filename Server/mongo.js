@@ -1,21 +1,19 @@
-import tvShow from './models/tvShow.js'
+import tvShowModel from './models/tvShow.js'
 import scraper from './scraper.js'
 import { findOne } from "domutils"
+import mongoConnect from "./index.js"
 
 const connectToMongoDB = async () => {
-    await mongo().then(async (mongoose) => {
+    await mongoConnect().then(async (mongoose) => {
         try{
             console.log('Connected to MongoDB')
             const newShows = await scraper();
 
             for(let i = 0; i < newShows.length; ++i){
-                const show = new tvShow(newShows[i]);
-                if(findOne(show)){
-                    continue;
-                }
-                else{
-                    await show.save();
-                } 
+                const show = await tvShowModel.findOne({title: newShows[i].title})
+                console.log(show)
+                show.description = newShows[i].image
+                await show.save()
             }
         } 
         finally{

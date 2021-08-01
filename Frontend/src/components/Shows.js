@@ -23,7 +23,7 @@ export default function Shows(props) {
             <div className="wrapper">
             {showsToDisplay.map((tvShow) => {
                return (
-                <ShowCards show = {tvShow}/>
+                <ShowCards key={tvShow._id} show = {tvShow}/>
                ) 
             })}
             {
