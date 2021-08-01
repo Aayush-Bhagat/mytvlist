@@ -48,3 +48,13 @@ export const addShow = async (req, res) => {
         res.status(404).json({message: error.message})
     }
 }
+
+export const getUserShows = async (req, res) => {
+    try {
+        const user = await userModel.findOne({username: req.user.username})
+        
+        res.status(200).json(user)
+    } catch (error){
+        res.status(404).json({message: error.message})
+    }
+}
