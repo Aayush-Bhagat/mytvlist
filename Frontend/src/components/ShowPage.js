@@ -14,8 +14,13 @@ export default function ShowPage() {
         .then((res) => {
             setShow(res.data)
         })
+        .catch((err) => {
+            console.log(err)
+        })
         .finally(() => {
-            setLoading(false)
+            if(show !== null){
+                setLoading(false)
+            }
         })
     }, [])
     console.log(show)

@@ -32,6 +32,6 @@ const mongoConnect = async() => {
     return mongoose
 }
 
-//mongoConnect()
+mongoConnect()
 
 export default mongoConnect

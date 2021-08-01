@@ -8,14 +8,7 @@ import {
 import Home from './components/Home'
 import GetShows from './components/getShows'
 import ShowPage from './components/ShowPage'
-
-function PopSmoke() {
-  return (
-    <div>
-      popsmoke
-    </div>
-  )
-}
+import Login from './components/Login'
 
 export default function App() {
   return (
@@ -30,7 +23,7 @@ export default function App() {
               <Link to="/shows">Shows</Link>
             </li>
             <li>
-              <Link to='/show'> show</Link>
+              <Link to="/login">Login</Link>
             </li>
           </ul>
         </nav>
@@ -41,6 +34,9 @@ export default function App() {
           </Route>
           <Route path="/show/:id">
             <ShowPage />
+          </Route>
+          <Route path="/login">
+            <Login/>
           </Route>
           <Route path="/">
             <Home />
