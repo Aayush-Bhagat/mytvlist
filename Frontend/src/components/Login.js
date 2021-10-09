@@ -2,13 +2,13 @@ import React, {useState} from 'react'
 import { useHistory } from "react-router-dom"
 import axios from 'axios'
 
-export default function Login() {
+export default function Login(props) {
     const [loginInfo, setLoginInfo] = useState({username: "", password: ""})
-    
+    const [wrongPass, setWrongPass] = useState(false)
     let history = useHistory()
     const submitHandler = (e)=>{
         e.preventDefault();
-        axios.post("http://localhost:5000/api/auth/Login", {
+        axios.post("/api/auth/login", {
             username: loginInfo.username,
             password: loginInfo.password
         })
@@ -17,11 +17,12 @@ export default function Login() {
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('username', res.data.username)
                 localStorage.setItem('isAuth', true)
+                props.setIsAuth(true)
                 history.push("/")
             }
-            else{
-
-            }
+        })
+        .catch((err)=>{
+            setWrongPass(true)
         })
     }
 
@@ -38,6 +39,7 @@ export default function Login() {
                         <label htmlFor="password">Password:</label>
                         <input type="password" name="password" id="password" onChange={(e)=> setLoginInfo((curState)=>{return{...curState, password:e.target.value}})} value={loginInfo.password}/>
                     </div>
+                    {wrongPass? <p> Username/password is incorrect</p> : null}
                     <input type="submit" value="Login" />
                 </div>
             </form>

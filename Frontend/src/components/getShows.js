@@ -1,30 +1,46 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import Shows from './Shows'
-const baseURL = "http://localhost:5000/api/shows";
+const baseURL = "/api/shows";
 
 export default function GetShows() {
     const [shows, setShows] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const [userShows, setUserShows] = useState(null)
 
     useEffect(() => {
         axios.get(baseURL)
         .then((res) => {
             setShows(res.data)
         })
-        .finally(() => {
-            setLoading(false)
+        .catch(err => {
+            console.log(err)
         })
     }, [])
 
+    useEffect(() => {
+        if(localStorage.getItem('isAuth')){
+            axios.get('api/user/getShows',  {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+            })
+            .then((res) =>{
+                setUserShows(res.data)
+            })
+        }
+        else{
+            setUserShows([])
+        }
+    },[])
+
+    console.log(userShows)
+
     return (
         <div>
-        {loading?
+        {shows === null || userShows === null?
         <div>
             Loading...
         </div>
         : 
-        <Shows shows={shows} />
+        <Shows shows={shows} userShows={userShows} setUserShows={setUserShows} />
         }
         </div>
     )
