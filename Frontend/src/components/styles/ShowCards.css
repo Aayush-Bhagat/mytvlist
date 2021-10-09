@@ -16,6 +16,10 @@
 .card__title {
   padding: 1rem;
 }
+.card_link {
+  text-decoration: none;
+  color: black;
+}
 .card__description {
   padding: 0 1rem;
 }

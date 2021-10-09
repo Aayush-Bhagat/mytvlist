@@ -4,24 +4,23 @@ import axios from "axios"
 
 export default function ShowPage() {
     const [show, setShow] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const [userShows, setUserShows] = useState(null)
     const id = useParams().id
-    console.log(id)
-    const baseURL = `http://localhost:5000/api/shows/${id}`
+    const baseURL = `/api/shows/${id}`
 
     useEffect(() => {
         axios.get(baseURL)
         .then((res) => {
             setShow(res.data)
         })
-        .finally(() => {
-            setLoading(false)
+        .catch((err) => {
+            console.log(err)
         })
     }, [])
-    console.log(show)
+
     return (
         <div>
-            {loading? 
+            {show === null? 
                <p> Loading...</p>
                 :
                 <div>
