@@ -43,7 +43,7 @@ export const addShow = async (req, res) => {
             Watched: watchStatus,
         })
         user.save()
-        res.status(200).json(user)
+        res.status(200).json(user.Shows)
     } catch (error){
         res.status(404).json({message: error.message})
     }
