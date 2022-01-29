@@ -21,7 +21,7 @@ dotenv.config()
 
 const CONNECTION_URL = process.env.Mongo_URL
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 const mongoConnect = async() => { 
     await mongoose.connect(CONNECTION_URL, {useNewUrlParser: true, useUnifiedTopology: true})
