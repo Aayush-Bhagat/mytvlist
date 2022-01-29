@@ -44,7 +44,6 @@ export default function ShowCards(props) {
       })
     }
 
-    console.log(watchStatus)
     return (
         <div>
               <div className="card">
